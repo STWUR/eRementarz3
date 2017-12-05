@@ -1,0 +1,46 @@
+---
+title: "Eksploracja danych"
+#subtitle: "Punkt widzenia praktyka"
+author: Bartosz Kolasa
+date: 05-12-2017
+output: 
+  revealjs::revealjs_presentation:
+    theme: moon
+    self_contained: false
+    transition: fade
+    reveal_plugins: ["notes"]
+    progress: true
+    reveal_options:
+      previewLinks: true
+---
+
+## Materiały
+
+<https://github.com/STWUR/eRementarz3>
+
+## Co robi Data Scientist?
+
+![](img/tasks-time.PNG)
+
+## Czego nie lubi Data Scientist?
+
+![](img/tasks-enjoy.PNG)
+
+## Wielokrotna iteracja
+
+![](img/data3.png)
+
+## Ekspolaracyjna analiza danych (EDA)
+
+"Procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data."
+
+John Tukey
+
+## Brudne dane
+
+> - dane niepełne
+> - dane nieprawidłowe
+> - dane niespójne
+> - duplikaty
+> - dane nieintegrujące się
+
