@@ -11,6 +11,43 @@
   <link rel="stylesheet" href="eRementarz3_files/reveal.js-3.3.0.1/css/reveal.css"/>
 
 
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
 
 <link rel="stylesheet" href="eRementarz3_files/reveal.js-3.3.0.1/css/theme/moon.css" id="theme">
 
@@ -482,10 +519,348 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section>
 <section id="brudne-dane" class="slide level2">
 <h2>Brudne dane</h2>
+<p><img src="img/bad-data-is.png" /></p>
+</section>
+<section id="dane-niepene" class="slide level2">
+<h2>Dane niepełne</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(titanic)
+<span class="kw">library</span>(dplyr)
+titanic_train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="kw">is.na</span>(Age)) <span class="op">%&gt;%</span><span class="st"> </span>head</code></pre></div>
+<pre><code>##   PassengerId Survived Pclass                          Name    Sex Age
+## 1           6        0      3              Moran, Mr. James   male  NA
+## 2          18        1      2  Williams, Mr. Charles Eugene   male  NA
+## 3          20        1      3       Masselmani, Mrs. Fatima female  NA
+## 4          27        0      3       Emir, Mr. Farred Chehab   male  NA
+## 5          29        1      3 O&#39;Dwyer, Miss. Ellen &quot;Nellie&quot; female  NA
+## 6          30        0      3           Todoroff, Mr. Lalio   male  NA
+##   SibSp Parch Ticket    Fare Cabin Embarked
+## 1     0     0 330877  8.4583              Q
+## 2     0     0 244373 13.0000              S
+## 3     0     0   2649  7.2250              C
+## 4     0     0   2631  7.2250              C
+## 5     0     0 330959  7.8792              Q
+## 6     0     0 349216  7.8958              S</code></pre>
+</section>
+<section id="dane-niepoprawne" class="slide level2">
+<h2>Dane niepoprawne</h2>
 <ul>
-<li class="fragment">dane niepełne</li>
-<li class="fragment">dane nieprawidłowe</li>
+<li>dane spoza oczekiwanego zakresu</li>
+<li>niepoprawne kombinacje danych</li>
 </ul>
+<p><img src="img/australia.png" /></p>
+</section>
+<section id="dane-niespojne" class="slide level2">
+<h2>Dane niespójne</h2>
+<p><img src="img/duplicates.jpg" /></p>
+</section>
+<section id="dane-niezintegrowane" class="slide level2">
+<h2>Dane niezintegrowane</h2>
+<p><img src="img/sources.png" /></p>
+</section>
+<section id="typy-danych" class="slide level2">
+<h2>Typy danych</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(titanic_train)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    891 obs. of  12 variables:
+##  $ PassengerId: int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ Survived   : int  0 1 1 1 0 0 0 0 1 1 ...
+##  $ Pclass     : int  3 1 3 1 3 3 1 3 3 2 ...
+##  $ Name       : chr  &quot;Braund, Mr. Owen Harris&quot; &quot;Cumings, Mrs. John Bradley (Florence Briggs Thayer)&quot; &quot;Heikkinen, Miss. Laina&quot; &quot;Futrelle, Mrs. Jacques Heath (Lily May Peel)&quot; ...
+##  $ Sex        : chr  &quot;male&quot; &quot;female&quot; &quot;female&quot; &quot;female&quot; ...
+##  $ Age        : num  22 38 26 35 35 NA 54 2 27 14 ...
+##  $ SibSp      : int  1 1 0 1 0 0 0 3 0 1 ...
+##  $ Parch      : int  0 0 0 0 0 0 0 1 2 0 ...
+##  $ Ticket     : chr  &quot;A/5 21171&quot; &quot;PC 17599&quot; &quot;STON/O2. 3101282&quot; &quot;113803&quot; ...
+##  $ Fare       : num  7.25 71.28 7.92 53.1 8.05 ...
+##  $ Cabin      : chr  &quot;&quot; &quot;C85&quot; &quot;&quot; &quot;C123&quot; ...
+##  $ Embarked   : chr  &quot;S&quot; &quot;C&quot; &quot;S&quot; &quot;S&quot; ...</code></pre>
+</section>
+<section id="uwaga-na-zmienne-czynnikowe" class="slide level2">
+<h2>Uwaga na zmienne czynnikowe</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read.csv</span>(<span class="st">&quot;myfile.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre></div>
+</section>
+<section id="macierz-odpowiedniosci" class="slide level2">
+<h2>Macierz odpowiedniości</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(titanic_train<span class="op">$</span>Survived)</code></pre></div>
+<pre><code>## 
+##   0   1 
+## 549 342</code></pre>
+</section>
+<section id="macierz-odpowiednosci" class="slide level2">
+<h2>Macierz odpowiedności</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(titanic_train<span class="op">$</span>Sex, titanic_train<span class="op">$</span>Survived)</code></pre></div>
+<pre><code>##         
+##            0   1
+##   female  81 233
+##   male   468 109</code></pre>
+</section>
+<section id="procentowo" class="slide level2">
+<h2>Procentowo</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prop.table</span>(<span class="kw">table</span>(titanic_train<span class="op">$</span>Sex, titanic_train<span class="op">$</span>Survived))</code></pre></div>
+<pre><code>##         
+##                   0          1
+##   female 0.09090909 0.26150393
+##   male   0.52525253 0.12233446</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># table(titanic_train$Sex, titanic_train$Survived) %&gt;% prop.table</span>
+<span class="kw">prop.table</span>(<span class="kw">table</span>(titanic_train<span class="op">$</span>Sex, titanic_train<span class="op">$</span>Survived), <span class="dt">margin=</span><span class="dv">1</span>)</code></pre></div>
+<pre><code>##         
+##                  0         1
+##   female 0.2579618 0.7420382
+##   male   0.8110919 0.1889081</code></pre>
+</section>
+<section id="czy-zmienne-sa-zalezne" class="slide level2">
+<h2>Czy zmienne są zależne?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chisq.test</span>(titanic_train<span class="op">$</span>Survived, titanic_train<span class="op">$</span>Sex) -&gt;<span class="st"> </span>chsq
+chsq<span class="op">$</span>observed</code></pre></div>
+<pre><code>##                       titanic_train$Sex
+## titanic_train$Survived female male
+##                      0     81  468
+##                      1    233  109</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chsq<span class="op">$</span>expected</code></pre></div>
+<pre><code>##                       titanic_train$Sex
+## titanic_train$Survived   female     male
+##                      0 193.4747 355.5253
+##                      1 120.5253 221.4747</code></pre>
+</section>
+<section id="ktora-kombinacja-zaburza-najbardziej" class="slide level2">
+<h2>Która kombinacja zaburza najbardziej?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chsq<span class="op">$</span>residuals</code></pre></div>
+<pre><code>##                       titanic_train$Sex
+## titanic_train$Survived    female      male
+##                      0 -8.086170  5.965128
+##                      1 10.245095 -7.557757</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chsq<span class="op">$</span>p.value</code></pre></div>
+<pre><code>## [1] 1.197357e-58</code></pre>
+</section>
+<section id="mniej-widoczne" class="slide level2">
+<h2>Mniej widoczne</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">titanic_emb &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(titanic_train, Embarked <span class="op">!=</span><span class="st"> &quot;&quot;</span>)
+<span class="kw">chisq.test</span>(titanic_emb<span class="op">$</span>Survived, titanic_emb<span class="op">$</span>Embarked) -&gt;<span class="st"> </span>chsq
+chsq<span class="op">$</span>observed</code></pre></div>
+<pre><code>##                     titanic_emb$Embarked
+## titanic_emb$Survived   C   Q   S
+##                    0  75  47 427
+##                    1  93  30 217</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chsq<span class="op">$</span>residuals</code></pre></div>
+<pre><code>##                     titanic_emb$Embarked
+## titanic_emb$Survived           C           Q           S
+##                    0 -2.82239750 -0.07993071  1.46918919
+##                    1  3.58645093  0.10156881 -1.86691454</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chsq<span class="op">$</span>p.value</code></pre></div>
+<pre><code>## [1] 1.769922e-06</code></pre>
+</section>
+<section id="wiecej-wymiarow" class="slide level2">
+<h2>Więcej wymiarów</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(titanic_train, <span class="kw">ftable</span>(Survived, Sex, Embarked))</code></pre></div>
+<pre><code>##                 Embarked       C   Q   S
+## Survived Sex                            
+## 0        female            0   9   9  63
+##          male              0  66  38 364
+## 1        female            2  64  27 140
+##          male              0  29   3  77</code></pre>
+</section>
+<section id="pakiet-desctools" class="slide level2">
+<h2>Pakiet DescTools</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(DescTools)
+<span class="kw">Desc</span>(titanic_train<span class="op">$</span>Survived, <span class="dt">plotit=</span><span class="ot">FALSE</span>)</code></pre></div>
+<pre><code>## ------------------------------------------------------------------------- 
+## titanic_train$Survived (integer - dichotomous)
+## 
+##   length      n    NAs unique
+##      891    891      0      2
+##          100.0%   0.0%       
+## 
+##    freq   perc  lci.95  uci.95&#39;
+## 0   549  61.6%   58.4%   64.8%
+## 1   342  38.4%   35.2%   41.6%
+## 
+## &#39; 95%-CI Wilson</code></pre>
+</section>
+<section id="wykresy" class="slide level2">
+<h2>Wykresy</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Desc</span>(titanic_train<span class="op">$</span>Survived, <span class="dt">plotit=</span><span class="ot">FALSE</span>) -&gt;<span class="st"> </span>d
+<span class="kw">plot</span>(d)</code></pre></div>
+<p><img src="eRementarz3_files/figure-revealjs/unnamed-chunk-13-1.png" width="768" /></p>
+</section>
+<section id="wiecej-kategorii" class="slide level2">
+<h2>Więcej kategorii</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Desc</span>(titanic_train<span class="op">$</span>Embarked, <span class="dt">plotit=</span><span class="ot">FALSE</span>)</code></pre></div>
+<pre><code>## ------------------------------------------------------------------------- 
+## titanic_train$Embarked (character)
+## 
+##   length      n    NAs unique levels  dupes
+##      891    891      0      4      4      y
+##          100.0%   0.0%                     
+## 
+##    level  freq   perc  cumfreq  cumperc
+## 1      S   644  72.3%      644    72.3%
+## 2      C   168  18.9%      812    91.1%
+## 3      Q    77   8.6%      889    99.8%
+## 4            2   0.2%      891   100.0%</code></pre>
+</section>
+<section id="wykresy-1" class="slide level2">
+<h2>Wykresy</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Desc</span>(titanic_train<span class="op">$</span>Embarked, <span class="dt">plotit=</span><span class="ot">FALSE</span>) -&gt;<span class="st"> </span>d
+<span class="kw">plot</span>(d)</code></pre></div>
+<p><img src="eRementarz3_files/figure-revealjs/unnamed-chunk-15-1.png" width="768" /></p>
+</section>
+<section id="zmienna-ciaga" class="slide level2">
+<h2>Zmienna ciągła</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Desc</span>(titanic_train<span class="op">$</span>Age, <span class="dt">plotit=</span><span class="ot">FALSE</span>)</code></pre></div>
+<pre><code>## ------------------------------------------------------------------------- 
+## titanic_train$Age (numeric)
+## 
+##   length       n     NAs  unique      0s    mean  meanCI
+##      891     714     177      88       0  29.699  28.632
+##            80.1%   19.9%            0.0%          30.766
+##                                                         
+##      .05     .10     .25  median     .75     .90     .95
+##    4.000  14.000  20.125  28.000  38.000  50.000  56.000
+##                                                         
+##    range      sd   vcoef     mad     IQR    skew    kurt
+##   79.580  14.526   0.489  13.343  17.875   0.387   0.160
+##                                                         
+## lowest : 0.42, 0.67, 0.75 (2), 0.83 (2), 0.92
+## highest: 70.0 (2), 70.5, 71.0 (2), 74.0, 80.0</code></pre>
+</section>
+<section id="wykresy-2" class="slide level2">
+<h2>Wykresy</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Desc</span>(titanic_train<span class="op">$</span>Age, <span class="dt">plotit=</span><span class="ot">FALSE</span>) -&gt;<span class="st"> </span>d
+<span class="kw">plot</span>(d)</code></pre></div>
+<p><img src="eRementarz3_files/figure-revealjs/unnamed-chunk-17-1.png" width="768" /></p>
+</section>
+<section id="formuy" class="slide level2">
+<h2>Formuły</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Desc</span>(titanic_train<span class="op">$</span>Survived <span class="op">~</span><span class="st"> </span>titanic_train<span class="op">$</span>Age, <span class="dt">plotit=</span><span class="ot">FALSE</span>)</code></pre></div>
+<pre><code>## ------------------------------------------------------------------------- 
+## titanic_train$Survived ~ titanic_train$Age
+## 
+## Summary: 
+## n pairs: 891, valid: 714 (80.1%), missings: 177 (19.9%), groups: 2
+## 
+##                         
+##               0        1
+## mean     30.626   28.344
+## median   28.000   28.000
+## sd       14.172   14.951
+## IQR      18.000   17.000
+## n           424      290
+## np      59.384%  40.616%
+## NAs         125       52
+## 0s            0        0
+## 
+## Kruskal-Wallis rank sum test:
+##   Kruskal-Wallis chi-squared = 1.9701, df = 1, p-value = 0.1604
+## 
+## 
+## Proportions of titanic_train$Survived in the quantiles of titanic_train$Age:
+##    
+##          Q1      Q2      Q3      Q4
+##   0   54.2%   63.9%   56.6%   62.7%
+##   1   45.8%   36.1%   43.4%   37.3%</code></pre>
+</section>
+<section id="formuy-1" class="slide level2">
+<h2>Formuły</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Desc</span>(titanic_train<span class="op">$</span>Survived <span class="op">~</span><span class="st"> </span>titanic_train<span class="op">$</span>Age, <span class="dt">plotit=</span><span class="ot">FALSE</span>) -&gt;d
+<span class="kw">plot</span>(d)</code></pre></div>
+<p><img src="eRementarz3_files/figure-revealjs/unnamed-chunk-19-1.png" width="768" /></p>
+</section>
+<section id="formuy-2" class="slide level2">
+<h2>Formuły</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Desc</span>(titanic_train<span class="op">$</span>Age <span class="op">~</span><span class="st"> </span>titanic_train<span class="op">$</span>Survived, <span class="dt">plotit=</span><span class="ot">FALSE</span>)</code></pre></div>
+<pre><code>## ------------------------------------------------------------------------- 
+## titanic_train$Age ~ titanic_train$Survived
+## 
+## Summary: 
+## n pairs: 891, valid: 714 (80.1%), missings: 177 (19.9%), groups: 2
+## 
+##                         
+##               0        1
+## mean     30.626   28.344
+## median   28.000   28.000
+## sd       14.172   14.951
+## IQR      18.000   17.000
+## n           424      290
+## np      59.384%  40.616%
+## NAs         125       52
+## 0s            0        0
+## 
+## Kruskal-Wallis rank sum test:
+##   Kruskal-Wallis chi-squared = 1.9701, df = 1, p-value = 0.1604</code></pre>
+</section>
+<section id="formuy-3" class="slide level2">
+<h2>Formuły</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Desc</span>(titanic_train<span class="op">$</span>Age <span class="op">~</span><span class="st"> </span>titanic_train<span class="op">$</span>Survived, <span class="dt">plotit=</span><span class="ot">FALSE</span>) -&gt;d
+<span class="kw">plot</span>(d)</code></pre></div>
+<p><img src="eRementarz3_files/figure-revealjs/unnamed-chunk-21-1.png" width="768" /></p>
+</section>
+<section id="rozkad-dugoogonowy" class="slide level2">
+<h2>Rozkład długoogonowy</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Desc</span>(<span class="kw">log10</span>(titanic_train<span class="op">$</span>Fare), <span class="dt">plotit=</span><span class="ot">FALSE</span>)</code></pre></div>
+<pre><code>## ------------------------------------------------------------------------- 
+## log10(titanic_train$Fare) (numeric)
+## 
+##   length       n    NAs  unique    0s  mean  meanCI
+##      891     891      0     248     0  -Inf      NA
+##           100.0%   0.0%          0.0%            NA
+##                                                    
+##      .05     .10    .25  median   .75   .90     .95
+##     0.86    0.88   0.90    1.16  1.49  1.89    2.05
+##                                                    
+##    range      sd  vcoef     mad   IQR  skew    kurt
+##      Inf      NA     NA    0.39  0.59    NA      NA
+##                                                    
+## lowest : -Inf (15), 0.6, 0.7, 0.8, 0.81
+## highest: 2.36 (4), 2.39 (2), 2.42 (2), 2.42 (4), 2.71 (3)</code></pre>
+</section>
+<section id="rozkad-dugoogonowy-1" class="slide level2">
+<h2>Rozkład długoogonowy</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Desc</span>(<span class="kw">log10</span>(titanic_train<span class="op">$</span>Fare), <span class="dt">plotit=</span><span class="ot">FALSE</span>) -&gt;d
+<span class="kw">plot</span>(d)</code></pre></div>
+<pre><code>## Warning in bplt(at[i], wid = width[i], stats = z$stats[, i], out = z$out[z
+## $group == : Outlier (-Inf) in boxplot 1 is not drawn</code></pre>
+<p><img src="eRementarz3_files/figure-revealjs/unnamed-chunk-23-1.png" width="768" /></p>
+</section>
+<section id="rozkad-dugoogonowy-2" class="slide level2">
+<h2>Rozkład długoogonowy</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+titanic_nozero &lt;-<span class="st"> </span><span class="kw">mutate</span>(titanic_train, <span class="dt">Fare=</span><span class="kw">na_if</span>(Fare,<span class="dv">0</span>))
+<span class="kw">Desc</span>(<span class="kw">log10</span>(titanic_nozero<span class="op">$</span>Fare), <span class="dt">plotit=</span><span class="ot">FALSE</span>)</code></pre></div>
+<pre><code>## ------------------------------------------------------------------------- 
+## log10(titanic_nozero$Fare) (numeric)
+## 
+##      length          n        NAs     unique         0s       mean
+##         891        876         15        247          0  1.2783017
+##                  98.3%       1.7%                  0.0%           
+##                                                                   
+##         .05        .10        .25     median        .75        .90
+##   0.8590902  0.8884828  0.8989993  1.1613680  1.4951973  1.8918624
+##                                                                   
+##       range         sd      vcoef        mad        IQR       skew
+##   2.1061341  0.4067163  0.3181693  0.3923808  0.5961980  0.8981877
+##                                                                   
+##      meanCI
+##   1.2513312
+##   1.3052722
+##            
+##         .95
+##   2.0541341
+##            
+##        kurt
+##   0.0782366
+##            
+## lowest : 0.603415, 0.69897, 0.7950106, 0.8087172, 0.8095597
+## highest: 2.3570291 (4), 2.3936117 (2), 2.4189225 (2), 2.4199557 (4), 2.7095491 (3)</code></pre>
+</section>
+<section id="rozkad-dugoogonowy-3" class="slide level2">
+<h2>Rozkład długoogonowy</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Desc</span>(<span class="kw">log10</span>(titanic_nozero<span class="op">$</span>Fare), <span class="dt">plotit=</span><span class="ot">FALSE</span>) -&gt;d
+<span class="kw">plot</span>(d)</code></pre></div>
+<p><img src="eRementarz3_files/figure-revealjs/unnamed-chunk-25-1.png" width="768" /></p>
+</section>
+<section id="podziekowania" class="slide level2">
+<h2>Podziękowania</h2>
+<p>Dziękujemy firmie Kruk SA i Wydziałowi Biotechnologii UWr za wspieranie spotkań STWURa.</p>
+<p><img src="img/kruk_logo.jpg" width="50%" /></p>
 </section>
     </div>
   </div>
