@@ -857,6 +857,21 @@ titanic_nozero &lt;-<span class="st"> </span><span class="kw">mutate</span>(tita
 <span class="kw">plot</span>(d)</code></pre></div>
 <p><img src="eRementarz3_files/figure-revealjs/unnamed-chunk-25-1.png" width="768" /></p>
 </section>
+<section id="szybki-sposob-na-outliery" class="slide level2">
+<h2>Szybki sposób na outliery</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(outliers)
+titanic_train <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Age)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">score=</span><span class="kw">scores</span>(Age, <span class="dt">type=</span><span class="st">&quot;iqr&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Name,Age,score) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(score)) <span class="op">%&gt;%</span><span class="st"> </span>head</code></pre></div>
+<pre><code>##                                   Name  Age    score
+## 1 Barkworth, Mr. Algernon Henry Wilson 80.0 2.349650
+## 2                  Svensson, Mr. Johan 74.0 2.013986
+## 3            Goldschmidt, Mr. George B 71.0 1.846154
+## 4              Artagaveytia, Mr. Ramon 71.0 1.846154
+## 5                 Connors, Mr. Patrick 70.5 1.818182
+## 6          Mitchell, Mr. Henry Michael 70.0 1.790210</code></pre>
+</section>
 <section id="podziekowania" class="slide level2">
 <h2>Podziękowania</h2>
 <p>Dziękujemy firmie Kruk SA i Wydziałowi Biotechnologii UWr za wspieranie spotkań STWURa.</p>

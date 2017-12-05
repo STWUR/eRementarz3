@@ -220,7 +220,7 @@ library(outliers)
 titanic_train %>%
   filter(!is.na(Age)) %>% 
   mutate(score=scores(Age, type="iqr")) %>%
-  select(Name,Age,score) %>% arrange(Desc(score)) %>% head
+  select(Name,Age,score) %>% arrange(desc(score)) %>% head
 ```
 
 
